@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#272727"
-    android:padding="8dp"
-    android:layout_margin="2dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imgview_album_pic"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        tools:srcCompat="@tools:sample/avatars" />
+    <data>
 
-    <TextView
-        android:id="@+id/txtview_album"
-        android:layout_width="wrap_content"
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="14dp"
-        android:textColor="@color/white"
-        android:layout_toRightOf="@+id/imgview_album_pic"
-        tools:text="TextView"
-        android:textSize="16sp"/>
+        android:background="#272727"
+        android:padding="8dp"
+        android:layout_margin="2dp">
 
-    <TextView
-        android:id="@+id/txtview_singer_album"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtview_album"
-        android:layout_toRightOf="@+id/imgview_album_pic"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="2dp"
-        android:textColor="#939292"
-        tools:text="TextView"/>
+        <ImageView
+            android:id="@+id/imgview_album_pic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtview_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/imgview_album_pic"
+            tools:text="TextView"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtview_singer_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtview_album"
+            android:layout_toRightOf="@+id/imgview_album_pic"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#939292"
+            tools:text="TextView" />
+
+    </RelativeLayout>
+</layout>

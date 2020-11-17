@@ -1,11 +1,11 @@
-package com.example.musicplayer.controller.activity;
+package com.example.musicplayer.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.musicplayer.controller.fragment.MusicPlayerFragment;
+import com.example.musicplayer.view.fragment.MusicPlayerFragment;
 
 public class MusicPlayerActivity extends SingleFragmentActivity {
 

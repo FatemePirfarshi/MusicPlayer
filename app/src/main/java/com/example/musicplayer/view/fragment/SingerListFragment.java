@@ -1,8 +1,9 @@
-package com.example.musicplayer.controller.fragment;
+package com.example.musicplayer.view.fragment;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.musicplayer.R;
+import com.example.musicplayer.databinding.FragmentMusicListBinding;
+import com.example.musicplayer.databinding.SingerListItemBinding;
 
 public class SingerListFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
+    private FragmentMusicListBinding mBinding;
 
     public SingerListFragment() {
         // Required empty public constructor
@@ -41,19 +42,19 @@ public class SingerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_music_list, container, false);
-        findViews(view);
+        mBinding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_music_list,
+                container,
+                false);
+
         initViews();
-        return view;
+        return mBinding.getRoot();
     }
 
     private void initViews() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBinding.recyclerViewMusicList.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
-    }
-
-    private void findViews(View view) {
-        mRecyclerView = view.findViewById(R.id.recycler_view_music_list);
     }
 
     private void updateUI(){
@@ -62,13 +63,12 @@ public class SingerListFragment extends Fragment {
 
     private class SingerHolder extends RecyclerView.ViewHolder{
 
-        private TextView mSingerName;
-        private ImageView mSingerPic;
+        SingerListItemBinding mSingerListItemBinding;
 
-        public SingerHolder(@NonNull View itemView) {
-            super(itemView);
-            mSingerName = itemView.findViewById(R.id.txtview_singer);
-            mSingerPic = itemView.findViewById(R.id.imgview_singer_pic);
+        public SingerHolder(SingerListItemBinding singerListItemBinding) {
+            super(singerListItemBinding.getRoot());
+            
+            mSingerListItemBinding = singerListItemBinding;
         }
 
         public void bindSinger(){
@@ -82,7 +82,11 @@ public class SingerListFragment extends Fragment {
         @NonNull
         @Override
         public SingerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
+            return new SingerHolder(DataBindingUtil.inflate(
+                    LayoutInflater.from(getContext()),
+                    R.layout.singer_list_item,
+                    parent,
+                    false));
         }
 
         @Override

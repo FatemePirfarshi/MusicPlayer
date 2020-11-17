@@ -1,11 +1,20 @@
 package com.example.musicplayer.model;
 
 public class Music {
+
+    private String mPath;
     private String mMusicName;
     private String mMusicPicPath;
-    private String mSingerName;
-    private String mAlbumName;
-    private String mAssetPath;
+    private String mSinger;
+    private String mAlbum;
+
+    public String getPath() {
+        return mPath;
+    }
+
+    public void setPath(String path) {
+        mPath = path;
+    }
 
     public String getMusicName() {
         return mMusicName;
@@ -23,27 +32,19 @@ public class Music {
         mMusicPicPath = musicPicPath;
     }
 
-    public String getSingerName() {
-        return mSingerName;
+    public String getSinger() {
+        return mSinger;
     }
 
-    public void setSingerName(String singerName) {
-        mSingerName = singerName;
+    public void setSinger(String singer) {
+        mSinger = singer;
     }
 
-    public String getAlbumName() {
-        return mAlbumName;
+    public String getAlbum() {
+        return mAlbum;
     }
 
-    public void setAlbumName(String albumName) {
-        mAlbumName = albumName;
-    }
-
-    public String getAssetPath() {
-        return mAssetPath;
-    }
-
-    public void setAssetPath(String assetPath) {
-        mAssetPath = assetPath;
+    public void setAlbum(String album) {
+        mAlbum = album;
     }
 }
