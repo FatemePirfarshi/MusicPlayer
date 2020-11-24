@@ -15,12 +15,18 @@ import android.view.ViewGroup;
 import com.example.musicplayer.R;
 import com.example.musicplayer.databinding.FragmentMusicListBinding;
 import com.example.musicplayer.model.Music;
+import com.example.musicplayer.view.adapter.MusicListAdapter;
+import com.example.musicplayer.view.adapter.MusicPagerAdapter;
+import com.example.musicplayer.viewmodel.MusicListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MusicListFragment extends Fragment {
 
     private FragmentMusicListBinding mBinding;
+    private MusicListViewModel mMusicListViewModel;
+    private MusicListAdapter mMusicListAdapter;
 
     public MusicListFragment() {
         // Required empty public constructor
@@ -29,7 +35,6 @@ public class MusicListFragment extends Fragment {
     public static MusicListFragment newInstance() {
         MusicListFragment fragment = new MusicListFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,6 +42,7 @@ public class MusicListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMusicListViewModel = new MusicListViewModel(getActivity());
     }
 
     @Override
@@ -59,6 +65,8 @@ public class MusicListFragment extends Fragment {
     }
 
     private void updateUI() {
-        //todo
+        List<Music> mMusics = mMusicListViewModel.getMusics();
+        mMusicListAdapter = new MusicListAdapter(getActivity(), mMusics);
+        mBinding.recyclerViewMusicList.setAdapter(mMusicListAdapter);
     }
 }

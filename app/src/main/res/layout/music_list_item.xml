@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="musicViewModel"
+            type="com.example.musicplayer.viewmodel.MusicViewModel" />
     </data>
 
     <RelativeLayout
@@ -28,7 +30,9 @@
             android:textColor="@color/white"
             android:layout_toRightOf="@+id/imgview_music_pic"
             tools:text="TextView"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:text="@{musicViewModel.musicName}"
+            />
 
         <TextView
             android:id="@+id/txtview_singer_music"
@@ -39,7 +43,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="2dp"
             android:textColor="#939292"
-            tools:text="TextView" />
+            tools:text="TextView"
+            android:text="@{musicViewModel.singer}"/>
 
     </RelativeLayout>
 </layout>

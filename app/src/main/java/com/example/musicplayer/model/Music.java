@@ -1,12 +1,15 @@
 package com.example.musicplayer.model;
 
+import android.net.Uri;
+
 public class Music {
 
     private String mPath;
     private String mMusicName;
-    private String mMusicPicPath;
     private String mSinger;
     private String mAlbum;
+    private Uri mAlbumArt;
+    private String mDuration;
 
     public String getPath() {
         return mPath;
@@ -24,12 +27,12 @@ public class Music {
         mMusicName = musicName;
     }
 
-    public String getMusicPicPath() {
-        return mMusicPicPath;
+    public Uri getAlbumArt() {
+        return mAlbumArt;
     }
 
-    public void setMusicPicPath(String musicPicPath) {
-        mMusicPicPath = musicPicPath;
+    public void setAlbumArt(Uri albumArt) {
+        mAlbumArt = albumArt;
     }
 
     public String getSinger() {
@@ -46,5 +49,13 @@ public class Music {
 
     public void setAlbum(String album) {
         mAlbum = album;
+    }
+
+    public String getDuration() {
+        return mDuration;
+    }
+
+    public void setDuration(String duration) {
+        mDuration = duration;
     }
 }
