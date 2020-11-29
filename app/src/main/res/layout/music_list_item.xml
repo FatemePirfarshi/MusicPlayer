@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:background="#272727"
         android:padding="8dp"
-        android:layout_margin="2dp">
+        android:layout_margin="2dp"
+        android:onClick="@{() -> musicViewModel.playMusic()}">
 
         <ImageView
             android:id="@+id/imgview_music_pic"

@@ -8,21 +8,21 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="8dp"
         tools:context=".view.fragment.MusicPlayerFragment"
         android:background="#272727">
 
         <ImageView
             android:id="@+id/imgview_music_pic"
             android:layout_width="300dp"
-            android:layout_height="340dp"
+            android:layout_height="240dp"
             android:scaleType="centerInside"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             tools:text="TextView"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="20dp"
             android:textSize="20sp"
             android:textColor="@color/white" />
 
@@ -47,14 +47,15 @@
 
         <SeekBar
             android:id="@+id/seekBar_music"
-            android:layout_width="400dp"
+            android:layout_gravity="center"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="20dp" />
 
         <RelativeLayout
-            android:layout_width="374dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp">
+            android:layout_gravity="center"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/txtview_start_seekbar"

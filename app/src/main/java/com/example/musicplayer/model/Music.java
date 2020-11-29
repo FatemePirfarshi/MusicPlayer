@@ -2,22 +2,16 @@ package com.example.musicplayer.model;
 
 import android.net.Uri;
 
-public class Music {
+import java.io.Serializable;
 
-    private String mPath;
+public class Music implements Serializable {
+
+    private long id;
     private String mMusicName;
     private String mSinger;
     private String mAlbum;
     private Uri mAlbumArt;
     private String mDuration;
-
-    public String getPath() {
-        return mPath;
-    }
-
-    public void setPath(String path) {
-        mPath = path;
-    }
 
     public String getMusicName() {
         return mMusicName;
@@ -57,5 +51,13 @@ public class Music {
 
     public void setDuration(String duration) {
         mDuration = duration;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
