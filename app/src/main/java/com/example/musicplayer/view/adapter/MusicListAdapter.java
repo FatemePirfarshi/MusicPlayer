@@ -1,5 +1,6 @@
 package com.example.musicplayer.view.adapter;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -66,27 +67,27 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Musi
         public MusicHolder(MusicListItemBinding musicListItemBinding) {
             super(musicListItemBinding.getRoot());
             mMusicListItemBinding = musicListItemBinding;
-            mMusicListItemBinding.setMusicViewModel(new MusicViewModel(mContext));
+            mMusicListItemBinding.setMusicViewModel(new MusicViewModel((Application) mContext));
         }
 
         public void bindMusic(Music music) {
             mMusicListItemBinding.getMusicViewModel().setMusic(music);
             mMusicListItemBinding.executePendingBindings();
 
-            Bitmap picture = getMusicPicture(music);
+//            Bitmap picture = getMusicPicture(music);
         //    if (picture != null)
-                Glide.with(mContext)
+//                Glide.with(mContext)
 //                        .asBitmap()
-                        .load(picture)
-                        .placeholder(R.mipmap.ic_placeholder)
-                        .into(mMusicListItemBinding.imgviewMusicPic);
+//                        .load(picture)
+//                        .placeholder(R.mipmap.ic_placeholder)
+//                        .into(mMusicListItemBinding.imgviewMusicPic);
         }
 
         private Bitmap getMusicPicture(Music music) {
             Bitmap bitmap = null;
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             try {
-                retriever.setDataSource(music.getPath());
+//                retriever.setDataSource(music.getPath());
                 byte[] embedPic = retriever.getEmbeddedPicture();
                 bitmap = BitmapFactory.decodeByteArray(embedPic, 0, embedPic.length);
             } catch (Exception e) {

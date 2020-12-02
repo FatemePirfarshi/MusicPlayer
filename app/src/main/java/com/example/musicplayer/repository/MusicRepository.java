@@ -2,35 +2,32 @@ package com.example.musicplayer.repository;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Environment;
-import android.os.ParcelFileDescriptor;
+import android.os.Build;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.musicplayer.R;
 import com.example.musicplayer.model.Music;
-import com.example.musicplayer.view.activity.MusicPlayerActivity;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class MusicRepository {
 
     public static final String TAG = "musicFileInformation";
     private static MusicRepository sInstance;
     private Context mContext;
+    private MediaPlayer mMediaPlayer;
+    private MutableLiveData<Music> mMutableLiveData = new MutableLiveData<>();
 
     private List<Music> mMusicsList = new ArrayList<>();
 
@@ -40,11 +37,20 @@ public class MusicRepository {
         return sInstance;
     }
 
-    private MusicRepository(Context context) {
-        mContext = context.getApplicationContext();
+    public MutableLiveData<Music> getMutableLiveData() {
+        return mMutableLiveData;
     }
 
-    public List<Music> getMusics() {
+    public MediaPlayer getMediaPlayer() {
+        return mMediaPlayer;
+    }
+
+    private MusicRepository(Context context) {
+        mContext = context.getApplicationContext();
+        getMusicsFromStorage();
+    }
+
+    public void getMusicsFromStorage() {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {
                 MediaStore.Audio.Media._ID,
@@ -76,9 +82,7 @@ public class MusicRepository {
                     // loadAlbumArt(music, albumId);
 //                    music.setAlbumArt(ContentUris.withAppendedId(
 //                            Uri.parse(cursor.getString(cursor.getColumnIndex(projection[6]))), albumId));
-                    Log.d(TAG," Name is:  " + music.getMusicName() +
-                            "Album name is: " + music.getAlbum() +
-                            "Duration is: " + music.getDuration());
+
                     mMusicsList.add(music);
                 } while (cursor.moveToNext());
 
@@ -88,6 +92,9 @@ public class MusicRepository {
                 cursor.close();
             }
         }
+    }
+
+    public List<Music> getMusics(){
         return mMusicsList;
     }
 
@@ -107,20 +114,48 @@ public class MusicRepository {
     }
 
     public void playMusic(Music music) {
-        Uri contentUri = ContentUris.withAppendedId(
-                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, music.getId());
+        mMutableLiveData.setValue(music);
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
+            startPlayMusic(music);
+        } else {
+            startPlayMusic(music);
+        }
+    }
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+    private void startPlayMusic(Music music) {
+        Uri contentUri = ContentUris.withAppendedId(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, music.getId());
+
+        mMediaPlayer = new MediaPlayer();
+        mMediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .build());
         try {
-            mediaPlayer.setDataSource(mContext, contentUri);
-            mediaPlayer.prepare();
+            mMediaPlayer.setDataSource(mContext, contentUri);
+            mMediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mediaPlayer.start();
+        mMediaPlayer.start();
+        mMutableLiveData.postValue(music);
+    }
+
+    public int currentPosition(){
+        return getMediaPlayer().getCurrentPosition();
+    }
+
+    public void pauseMusic(){
+        mMediaPlayer.pause();
+    }
+
+    public void startMusic(){
+        mMediaPlayer.start();
+    }
+
+    public void setNewPosition(int newPosition){
+        mMediaPlayer.seekTo(newPosition);
     }
 }

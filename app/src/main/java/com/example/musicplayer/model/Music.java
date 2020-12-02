@@ -45,8 +45,8 @@ public class Music implements Serializable {
         mAlbum = album;
     }
 
-    public String getDuration() {
-        return mDuration;
+    public int getDuration() {
+        return Integer.parseInt(mDuration);
     }
 
     public void setDuration(String duration) {
